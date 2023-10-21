@@ -3,14 +3,12 @@
 float fahr_to_kelvin(float temperature);
 float fahr_to_cels(float temperature);
 
-
-
 int main(){
     int option;
     float temperature;
 
     printf("Enter the temperature you would like to convert:");
-    scanf("%d", &temperature);
+    scanf("%f", &temperature);
 
     printf("\n");
     printf("Enter 0 to convert to celsius:\n");
@@ -20,10 +18,10 @@ int main(){
 
     switch(option){
     {
-        case 0: printf ("%f to celsius is %f\n", temperature, fahr_to_cels(temperature));
+        case 0: printf ("%.2f to celsius is %.2f\n", temperature, fahr_to_cels(temperature));
         break;
 
-        case 1: printf(" Convert to kelvin\n");
+        case 1: printf("%.2f to kelvin %.2f\n", temperature, fahr_to_kelvin(temperature));
         break;
 
         case 2: break;
@@ -31,4 +29,16 @@ int main(){
         default: break;
     }
     }
+}
+
+float fahr_to_cels(float temperature){
+    float celcius;
+    celcius = (temperature - 32)/1.8;
+    return celcius;
+}
+
+float fahr_to_kelvin(float temperature){
+    float kelvin;
+    kelvin = fahr_to_cels(temperature) + 273.15;
+    return kelvin;
 }

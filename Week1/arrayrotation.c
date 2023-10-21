@@ -12,7 +12,7 @@ int main(){
     }
 
     for(a=0; a<5; a++){
-        printf("%i\n", numarray[a]);
+        printf("%d", numarray[a]);
     }
 
 }
