@@ -1,19 +1,18 @@
 #include <stdio.h>
 
-int str_len(char wordforarray){
+int str_len(char * wordarray){
     int length = 0;
-    char wordarray[] = "wordforarray" ;
     for (int i = 0; wordarray[i] != '\0'; i++){
-        length = length + 1 ;
-        return length;
+        //until the element = \0 the loop will run and the length will increment
+        length++ ;
     }
+    // returns length to main function
+    return length;
 }
 
 int main(){
-    char word;
+    char word[45] = "dsjkgjqpernfckdjdfadjfh";
 
-    printf("Enter a word: ");
-    scanf("%c\n", &word);
-
+    //pass the word as a parameter 
     printf("The length of the word is: %d\n", str_len(word));
 }
