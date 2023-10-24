@@ -7,15 +7,17 @@ int isPrime(int isitaprime) {
     if (isitaprime == 1){
         prime = 0;
         return prime;
+
     } else {
         // a loop which divides the parameter by each number until itself
-        for (int i = 1; i < isitaprime; i++){
+        for (int i = 1; i <= isitaprime; i++){
         //if the modulus is 0 then it is a factor
             if (isitaprime % i == 0){
                 factors = factors + 1 ;
             }
         }
-        // if the factors are 1 and itself it is a prime number - return 1
+    }
+    // if the factors are 1 and itself it is a prime number - return 1
         if (factors == 2){
             prime = 1;
             return prime;
@@ -23,7 +25,6 @@ int isPrime(int isitaprime) {
             prime = 0;
             return prime;
         }
-    }
 }
 
 int main(){
@@ -38,8 +39,8 @@ int main(){
     prime = isPrime(number);
 
     if (prime == 1){
-    printf("The number is prime");
+    printf("The number is prime \n");
     } else {
-     printf("The number is not prime");   
+     printf("The number is not prime \n");   
     }
 }
