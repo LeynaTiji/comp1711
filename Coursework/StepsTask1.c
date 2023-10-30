@@ -63,12 +63,17 @@ int main() {
     while (fgets(line_buffer, buffer_size, file) != NULL) {
         // splits string and puts each value into an array
         tokeniseRecord(line_buffer, ",", arrayofdata[num_records].date, arrayofdata[num_records].time, tempSteps);
-        // arrayofdata[num_records].steps = atoi(tempSteps);
-        printf("%s", arrayofdata[num_records].date);
+        //converts character to an integer
+        arrayofdata[num_records].steps = atoi(tempSteps);
         num_records ++ ;
     }
 
     printf("Number of records in file: %d\n", num_records);
+
+    for (int i=0; i <3; i++){
+        //prints records
+        printf("%s/%s/%d\n", arrayofdata[i].date, arrayofdata[i].time, arrayofdata[i].steps);
+    }
 
     fclose(file);
     return 0;
