@@ -62,7 +62,13 @@ void tokeniseRecord(const char *input, const char *delimiter,
  */
 FILE *open_file(char *filename, char *mode)
 {
-    // to do
+    FILE *file = fopen(filename, mode);
+    if (file == NULL){
+        perror("");
+        exit(1);
+    }
+
+    return file;
 }
 
 /**
@@ -74,7 +80,13 @@ FILE *open_file(char *filename, char *mode)
  */
 int read_file(FILE *inputFile, reading *dataArray)
 {
-    // to do
+    int count = 0;
+    char line_buffer[buffer_size];
+    while (fgets(line_buffer, buffer_size, inputFile) != NULL) {
+        tokeniseRecord(line_buffer, ",", daily_readings[counter].date, &daily_readings[counter].bloodIron);
+        counter++;
+    }
+    fclose(input);
 }
 
 /**

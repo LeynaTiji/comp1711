@@ -1,5 +1,5 @@
 #include "utilities.h"
-#include <ctype.h>
+#include <ctype.h> //allows for upper function
 
 int main()
 {
@@ -24,13 +24,9 @@ int main()
 
     while (1)
     {
-        FILE *input = fopen(filename, "r");
-        
-        if (!input)
-        {
-            printf("Error: File could not be opened\n");
-            return 1;
-        }
+        FILE *input = open_file(filename, "r");
+
+        int read_file(FILE *input, reading *daily_readings);
 
         printf("A: View all your blood iron levels\n");                       // BRONZE
         printf("B: View your average blood iron level\n");                    // BRONZE
@@ -43,26 +39,19 @@ int main()
 
         // get the next character typed in and store in the 'choice'
         choice = getchar();
-        // converts the character to uppercase
         choice = toupper(choice);
 
         // this gets rid of the newline character which the user will enter
         // as otherwise this will stay in the stdin and be read next time
         while (getchar() != '\n');
 
+
         // switch statement to control the menu.
         switch (choice)
         {
         // this allows for either capital or lower case
         case 'A':
-            counter = 0;
-            while (fgets(line, buffer_size, input))
-            {
-                // split up the line and store it in the right place
-                // using the & operator to pass in a pointer to the bloodIron so it stores it
-                tokeniseRecord(line, ",", daily_readings[counter].date, &daily_readings[counter].bloodIron);
-                counter++;
-            }
+        
             for (int i = 0; i < counter; i++)
             {
                 printf("%s - Blood iron: %.1f\n", daily_readings[i].date, daily_readings[i].bloodIron);
