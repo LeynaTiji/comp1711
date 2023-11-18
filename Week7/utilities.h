@@ -4,7 +4,7 @@
 #include <math.h>
 
 // declaring this value so I can use it in different places
-#define buffer_size 100
+int buffer_size = 100;
 
 /**
  * @brief Struct to hold each daily reading, contains the date as a string
@@ -60,16 +60,17 @@ void tokeniseRecord(const char *input, const char *delimiter,
  * @param mode the mode (r/w/a/r+/w+/a+)
  * @return FILE* The file object to store the opened file in.
  */
-FILE *open_file(char *filename, char *mode)
-{
-    FILE *file = fopen(filename, mode);
-    if (file == NULL){
-        perror("");
-        exit(1);
-    }
 
-    return file;
-}
+// FILE *open_file(char *filename, char *mode)
+// {
+//     FILE *file = fopen(filename, mode);
+//     if (file == NULL){
+//         printf("Error: File could not be opened\n");
+//         exit(1);
+//     }
+
+//     return file;
+// }
 
 /**
  * @brief Reads the data from the input file into an array of structs
@@ -78,16 +79,21 @@ FILE *open_file(char *filename, char *mode)
  * @param dataArray the array of readings
  * @return int Returns the number of readings from the file
  */
-int read_file(FILE *inputFile, reading *dataArray)
-{
-    int count = 0;
-    char line_buffer[buffer_size];
-    while (fgets(line_buffer, buffer_size, inputFile) != NULL) {
-        tokeniseRecord(line_buffer, ",", daily_readings[counter].date, &daily_readings[counter].bloodIron);
-        counter++;
-    }
-    fclose(input);
-}
+// int read_file(FILE *inputFile, reading *dataArray, int count)
+// {
+    
+//     char line_buffer[buffer_size];
+    
+//     while (fgets(line_buffer, buffer_size, inputFile) != NULL) {
+//         tokeniseRecord(line_buffer, ",", dataArray[count].date, & dataArray[count].bloodIron);
+//         printf("%s - Blood iron: %.1f\n", dataArray[count].date, dataArray[count].bloodIron);
+//         count ++;
+//     }
+
+//     return count;
+
+//     fclose(inputFile);
+// }
 
 /**
  * @brief Checks that there was data for each part of each reading in the file

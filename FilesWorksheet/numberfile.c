@@ -14,7 +14,7 @@ FILE *open_file(char filename[], char mode[]) {
 int main() {
     char filename [] = "numbers.dat";
     // call file function
-    FILE *file = open_file(filename, "a");
+    FILE *file = open_file(filename, "a+");
 
     int buffer_size = 100;
     float total = 0, average;
@@ -22,13 +22,13 @@ int main() {
     char line_buffer[buffer_size];
 
     while (fgets(line_buffer, buffer_size, file) != NULL) {
-        total = total + atoi(line_buffer);
+        total = total + atof(line_buffer);
         count++ ;
     }
 
-    atof(average) = total / count;
-
-    fprintf("%c\n", average);
+    average = total / count;
+    
+    fprintf(file, "%f\n", average);
 
     fclose(file);
     return 0;

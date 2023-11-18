@@ -1,25 +1,26 @@
 #include <stdio.h>
-#include <string.h>
 
-struct student {
+typedef struct {
     char name [20];
     char student_id [11]; // Assuming 10 digits.
     unsigned mark;
-};
+} student;
 
 int main () {
-    struct student students[3];
+    // Data generated using ChatGPT.
+    int number_of_students = 3, i;
+    student students[2] ;
 
-    //predefined data arrays
-    char *names[]= {};
-    char *ids[] = {};
-    unsigned marks[] = {};
+    for (i = 0; i < number_of_students; i++){
+        
+    }
 
-
-    strcpy(new_student.name, "Name Surname");
-    strcpy(new_student.student_id, "13902178");
-    printf("Student name: %s\n", new_student.name);
-    printf("Student ID:   %s\n", new_student.student_id);
-    printf("Final mark:   %u\n", new_student.mark);
+    for (i = 0; i < number_of_students; i++) {
+        printf("-------------\n");
+        printf("Student name: %s\n", students[i].name);
+        printf("Student ID: %s\n", students[i].student_id);
+        printf("Final mark: %u\n", students[i].mark);
+    }
+    printf("-------------\n");
     return 0;
 }
