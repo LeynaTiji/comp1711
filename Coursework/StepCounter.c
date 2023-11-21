@@ -1,4 +1,5 @@
 #include "FitnessDataStruct.h"
+#include <math.h>
 
 // Struct moved to header file
 
@@ -11,10 +12,11 @@ FILE *open_file(char filename[], char mode[]){
     if (file == NULL){
         printf("Error: could not open file\n");
         exit(1);
+    } else {
+        printf("File successfully loaded\n");
     }
     return file;
     }
-
 
 // This is your helper function. Do not change it in any way.
 // Inputs: character array representing a row; the delimiter character
@@ -57,12 +59,15 @@ int main() {
 
     char choice;
 
-    double mean;
-    int rounded;
+    float mean;
+    // float rounded;
     int minVal = 50000;
     int maxVal = 0;
     int i;
     int j;
+    int counter = 0;
+    char * stepsarray[4]; 
+    int longesttime = 0;
 
     while(1){
 
@@ -107,7 +112,6 @@ int main() {
             }
 
             fclose(file);
-
             break;
 
         case 'B':
@@ -127,7 +131,6 @@ int main() {
                     printf("Fewest steps: %s/%s\n", arrayofdata[j].date, arrayofdata[j].time);
                 }
             }
-            
             break;
 
         case 'D':
@@ -143,7 +146,6 @@ int main() {
                     printf("Largest steps: %s/%s\n", arrayofdata[j].date, arrayofdata[j].time);
                 }
             }
-
             break;
 
         case 'E':
@@ -152,13 +154,39 @@ int main() {
             {
                 mean += arrayofdata[j].steps;
             }
+
             mean = mean / num_records;
-            rounded = round(mean);
-            printf("Mean step count: %d\n", rounded);
+            printf("Mean step count: %f\n", mean);
             break;
 
         case 'F':
-            return 0;
+            i = 0;
+            for (i; i < num_records; i++){
+                if (arrayofdata[i].steps > 500){
+                    j = i;
+                    while (arrayofdata[j].steps > 500){
+                        counter ++;
+                        j ++;
+                    }
+
+                    j --;
+
+                    if (counter > longesttime){
+                        longesttime = counter;
+
+                        stepsarray[0] = arrayofdata[i].date;
+                        stepsarray[1] = arrayofdata[i].time;
+                        stepsarray[2] = arrayofdata[j].date;
+                        stepsarray[3] = arrayofdata[j].time;
+                    }
+
+                    counter = 0;
+                    i = j + 1;
+                }
+            }
+
+            printf("Longest period start: %s %s\n", stepsarray[0], stepsarray[1]);
+            printf("Longest period end: %s %s\n", stepsarray[2], stepsarray[3]);
             break;
 
         case 'Q':
@@ -167,9 +195,18 @@ int main() {
 
         // if they type anything else:
         default:
-            printf("Invalid choice\n");
+            printf("Invalid choice, Try again\n");
+
+            printf("\n");
+            printf("A: Specify the filename to be imported\n");                     
+            printf("B: Display the total number of records in the file\n");                    
+            printf("C: Find the data and time of the timeslot with the fewest steps\n");                     
+            printf("D: Find the data and time of the timeslot with the largest number of steps\n");                    
+            printf("E: Find the mean step count of all the records in the file\n");       
+            printf("F: Find the longest continuous period where the step count is above 500 steps\n");                 
+            printf("Q: Quit\n");
+
             break;
         }
-
      }
 }
