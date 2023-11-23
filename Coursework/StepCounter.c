@@ -1,5 +1,4 @@
 #include "FitnessDataStruct.h"
-#include <math.h>
 
 // Struct moved to header file
 
@@ -60,7 +59,7 @@ int main() {
     char choice;
 
     float mean;
-    // float rounded;
+    int rounded;
     int minVal = 50000;
     int maxVal = 0;
     int i;
@@ -81,7 +80,6 @@ int main() {
         printf("Q: Quit\n");
 
         choice = getchar();
-        choice = toupper(choice);
 
         // this gets rid of the newline character which the user will enter
         // as otherwise this will stay in the stdin and be read next time
@@ -92,6 +90,7 @@ int main() {
         {
         // this allows for either capital or lower case
         case 'A':
+        case 'a':
 
             // get filename from the user
             printf("Input filename:");
@@ -115,10 +114,12 @@ int main() {
             break;
 
         case 'B':
+        case 'b':
             printf("Total records: %d\n", num_records);
             break;
 
         case 'C':
+        case 'c':
 
             for(int i = 0 ; i < num_records; i++){
                 if (minVal > arrayofdata[i].steps){
@@ -134,6 +135,7 @@ int main() {
             break;
 
         case 'D':
+        case 'd':
 
             for(int i = 0 ; i < num_records; i++){
                 if (maxVal < arrayofdata[i].steps){
@@ -149,6 +151,7 @@ int main() {
             break;
 
         case 'E':
+        case 'e':
         
             for (int j = 0; j < num_records; j++)
             {
@@ -156,10 +159,12 @@ int main() {
             }
 
             mean = mean / num_records;
-            printf("Mean step count: %f\n", mean);
+            rounded = mean + 0.5;
+            printf("Mean step count: %d\n", rounded);
             break;
 
         case 'F':
+        case 'f':
             i = 0;
             for (i; i < num_records; i++){
                 if (arrayofdata[i].steps > 500){
@@ -190,21 +195,13 @@ int main() {
             break;
 
         case 'Q':
+        case 'q':
             return 0;
             break;
 
         // if they type anything else:
         default:
             printf("Invalid choice, Try again\n");
-
-            printf("\n");
-            printf("A: Specify the filename to be imported\n");                     
-            printf("B: Display the total number of records in the file\n");                    
-            printf("C: Find the data and time of the timeslot with the fewest steps\n");                     
-            printf("D: Find the data and time of the timeslot with the largest number of steps\n");                    
-            printf("E: Find the mean step count of all the records in the file\n");       
-            printf("F: Find the longest continuous period where the step count is above 500 steps\n");                 
-            printf("Q: Quit\n");
 
             break;
         }
