@@ -9,10 +9,10 @@ FITNESS_DATA arrayofdata[100];
 FILE *open_file(char filename[], char mode[]){
     FILE *file = fopen(filename, mode);
     if (file == NULL){
-        printf("Error: could not open file\n");
+        printf("Error: could not find or open the file.\n");
         exit(1);
     } else {
-        printf("File successfully loaded\n");
+        printf("File successfully loaded.\n");
     }
     return file;
     }
@@ -70,7 +70,6 @@ int main() {
 
     while(1){
 
-        printf("\n");
         printf("A: Specify the filename to be imported\n");                     
         printf("B: Display the total number of records in the file\n");                    
         printf("C: Find the data and time of the timeslot with the fewest steps\n");                     
@@ -78,6 +77,7 @@ int main() {
         printf("E: Find the mean step count of all the records in the file\n");       
         printf("F: Find the longest continuous period where the step count is above 500 steps\n");                 
         printf("Q: Quit\n");
+        printf("Enter choice: ");
 
         choice = getchar();
 
@@ -93,7 +93,7 @@ int main() {
         case 'a':
 
             // get filename from the user
-            printf("Input filename:");
+            printf("Input filename: ");
 
             // these lines read in a line from the stdin (where the user types)
             // and then takes the actual string out of it
@@ -129,7 +129,7 @@ int main() {
 
             for(int j = 0 ; j < num_records; j++){
                 if (minVal == arrayofdata[j].steps){
-                    printf("Fewest steps: %s/%s\n", arrayofdata[j].date, arrayofdata[j].time);
+                    printf("Fewest steps: %s %s\n", arrayofdata[j].date, arrayofdata[j].time);
                 }
             }
             break;
@@ -145,7 +145,7 @@ int main() {
 
             for(int j = 0 ; j < num_records; j++){
                 if (maxVal == arrayofdata[j].steps){
-                    printf("Largest steps: %s/%s\n", arrayofdata[j].date, arrayofdata[j].time);
+                    printf("Largest steps: %s %s\n", arrayofdata[j].date, arrayofdata[j].time);
                 }
             }
             break;
@@ -201,7 +201,7 @@ int main() {
 
         // if they type anything else:
         default:
-            printf("Invalid choice, Try again\n");
+            printf("Invalid choice. Try again.\n");
 
             break;
         }
