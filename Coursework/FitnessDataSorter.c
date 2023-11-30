@@ -30,17 +30,6 @@ void tokeniseRecord(char *record, char *delimiter, char *date, char *time, int *
 }
 
 
-FILE *open_file(char filename[], char mode[]){
-    FILE *file = fopen(filename, mode);
-    if (file == NULL){
-        printf("Error: could not find or open the file.\n");
-        exit(1);
-    } else {
-        return file;
-    }
-    
-}
-
 int main() {
     
     char line[buffer_size];
@@ -54,25 +43,29 @@ int main() {
     fgets(line, buffer_size, stdin);
     sscanf(line, " %s ", filename);
     
-    FILE *file = open_file(filename, "r");
-    
-    while (fgets(line_buffer, buffer_size, file) != NULL) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL){
+        printf("Error: could not find or open the file.\n");
+        exit(1);
+    } else {
+        return file;
+        while (fgets(line_buffer, buffer_size, file) != NULL) {
                 // splits string and puts each value into an array
                 tokeniseRecord(line_buffer, ",", arrayofdata[num_records].date, arrayofdata[num_records].time, tempSteps);
                 //converts character to an integer
                 arrayofdata[num_records].steps = atoi(tempSteps);
                 num_records ++ ;
-    }
-
-
-    for (int i =0; i < num_records; i++){
-        if (arrayofdata[i].date == NULL){
-            printf("Error: file is formatted incorrectly.\n");
-        } else if (arrayofdata[i].time == NULL){
-            printf("Error: file is formatted incorrectly.\n");
-        } else if (arrayofdata[i].steps == NULL){
-            printf("Error: file is formatted incorrectly.\n");
         }
     }
+
+    // for (int i =0; i < num_records; i++){
+    //     if (arrayofdata[i].date == NULL){
+    //         printf("Error: file is formatted incorrectly.\n");
+    //     } else if (arrayofdata[i].time == NULL){
+    //         printf("Error: file is formatted incorrectly.\n");
+    //     } else if (arrayofdata[i].steps == NULL){
+    //         printf("Error: file is formatted incorrectly.\n");
+    //     }
+    // }
 
 }
