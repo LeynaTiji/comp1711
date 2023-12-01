@@ -54,7 +54,7 @@ int main() {
 
     while (fgets(line_buffer, buffer_size, file) != NULL) {
                 // splits string and puts each value into an array
-                tokeniseRecord(line_buffer, ",", arrayofdata[num_records].date, arrayofdata[num_records].time, arrayofdata[num_records].steps);
+                tokeniseRecord(line_buffer, ',', arrayofdata[num_records].date, arrayofdata[num_records].time, &arrayofdata[num_records].steps);
 
                 printf("%d\n", arrayofdata[num_records].steps);
                 num_records ++ ;
