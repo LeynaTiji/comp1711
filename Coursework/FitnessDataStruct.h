@@ -7,15 +7,15 @@
 
 int buffer_size = 100;
 
-// Define an appropriate struct
+// Define the struct for the fitness data
 typedef struct {
-	char date[11];
-	char time[6];
-	int steps;
-} FITNESS_DATA;
+    char date[11];
+    char time[6];
+    int steps;
+} FitnessData;
 
-// Helper function prototypes
-void tokeniseRecord(const char *input, const char *delimiter, char *date, char *time, char *steps);
-     // Create a copy of the input string as strtok modifies the string
+FitnessData arrayofdata[200];
 
-#endif // FITNESS_DATA_STRUCT_H
+// Function to tokenize a record
+void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *steps) {
+}

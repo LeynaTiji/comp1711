@@ -38,6 +38,22 @@ FILE *open_file(char filename[], char mode[]){
     return file;
     }
 
+
+void bubblesort(int numofrecords){
+    FitnessData temp;
+
+    for (int j =0; j < numofrecords; j++){
+        for (int k =0; k < numofrecords - j ; k++){
+            if (arrayofdata[k].steps < arrayofdata[k+1].steps){
+                temp = arrayofdata[k];
+                arrayofdata[k] = arrayofdata[k + 1];
+                arrayofdata[k + 1] = temp;
+
+            }
+        }
+    }
+}
+
 int main() {
     
     char line[buffer_size];
@@ -54,21 +70,31 @@ int main() {
 
     while (fgets(line_buffer, buffer_size, file) != NULL) {
                 // splits string and puts each value into an array
-                tokeniseRecord(line_buffer, ',', arrayofdata[num_records].date, arrayofdata[num_records].time, &arrayofdata[num_records].steps);
-
-                printf("%d\n", arrayofdata[num_records].steps);
+                tokeniseRecord(line_buffer, ',', arrayofdata[num_records].date, arrayofdata[num_records].time, &arrayofdata[num_records].steps);                
                 num_records ++ ;
     }
 
+    fclose(file);
 
-    // for (int i =0; i < num_records; i++){
-    //     if (arrayofdata[i].date == NULL){
-    //         printf("Error: file is formatted incorrectly.\n");
-    //     } else if (arrayofdata[i].time == NULL){
-    //         printf("Error: file is formatted incorrectly.\n");
-    //     } else if (arrayofdata[i].steps == NULL){
-    //         printf("Error: file is formatted incorrectly.\n");
-    //     }
-    // }
+    for (int i = 0; i < num_records; i++){
+        if (arrayofdata[i].steps == 0){
+            printf("Error: file is formatted incorrectly.\n");
+            return 1;
+        }
+    }
+
+    bubblesort(num_records);
+
+    fopen (strcat(filename, ".tsv"), "w");
+
+    for (int i = 0; i < num_records; i++) {
+        fprintf(file, "%s\t%s\t%d\n", arrayofdata[i].date, arrayofdata[i].time, arrayofdata[i].steps);
+    }
+
+    fclose(file);
+
+    printf("Data sorted and written to %s\n", filename);
+
+    return 0;
 
 }
